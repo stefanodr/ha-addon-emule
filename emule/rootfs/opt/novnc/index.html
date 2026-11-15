@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>eMule</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script>
+  // Home Assistant ingress serves this page under a dynamic prefix
+  // (/api/hassio_ingress/<token>/), so the websocket path must be relative to it.
+  var base = location.pathname;
+  if (!base.endsWith('/')) { base += '/'; }
+  var wsPath = base.replace(/^\//, '') + 'websockify';
+  location.replace(
+    'vnc.html?autoconnect=true&resize=scale&reconnect=true&path=' +
+    encodeURIComponent(wsPath)
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+configuration:
+  resolution:
+    name: Risoluzione dello schermo
+    description: Dimensione del desktop virtuale in cui gira eMule.
+  download_path:
+    name: Cartella dei download
+    description: Cartella base per i download. Le sottocartelle Incoming e Temp vengono create qui al primo avvio (predefinita /media/emule).
+  install_vcredist:
+    name: Installa il runtime Visual C++
+    description: Attivalo solo se eMule non si avvia. Installa una volta sola il runtime Visual C++ nel prefisso Wine al prossimo avvio.
+network:
+  4662/tcp: Porta TCP di eMule (connessioni client ed2k)
+  4672/udp: Porta UDP di eMule (Kad e richieste estese)
+  4711/tcp: Web server di eMule (facoltativo, abilitalo prima in eMule)

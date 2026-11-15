@@ -1,0 +1,36 @@
+name: eMule
+version: "0.1.0"
+slug: emule
+description: eMule Community (ed2k / Kad) running under Wine, with its full interface available inside Home Assistant
+url: https://github.com/stefanodr/ha-addon-emule
+arch:
+  - amd64
+init: false
+startup: services
+boot: auto
+stage: experimental
+ingress: true
+ingress_port: 8099
+panel_icon: mdi:download-network
+panel_title: eMule
+map:
+  - type: media
+    read_only: false
+  - type: share
+    read_only: false
+ports:
+  4662/tcp: 4662
+  4672/udp: 4672
+  4711/tcp: null
+ports_description:
+  4662/tcp: eMule TCP port (ed2k client connections)
+  4672/udp: eMule UDP port (Kad and extended requests)
+  4711/tcp: eMule web server (optional, enable it in eMule first)
+options:
+  resolution: 1600x900
+  download_path: /media/emule
+  install_vcredist: false
+schema:
+  resolution: list(1280x720|1366x768|1600x900|1920x1080)
+  download_path: str
+  install_vcredist: bool

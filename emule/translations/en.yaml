@@ -1,0 +1,14 @@
+configuration:
+  resolution:
+    name: Screen resolution
+    description: Size of the virtual desktop where eMule runs.
+  download_path:
+    name: Download folder
+    description: Base folder for downloads. The Incoming and Temp sub-folders are created here on first start (default /media/emule).
+  install_vcredist:
+    name: Install Visual C++ runtime
+    description: Only enable this if eMule does not start. Installs the Visual C++ runtime into the Wine prefix once, at the next start.
+network:
+  4662/tcp: eMule TCP port (ed2k client connections)
+  4672/udp: eMule UDP port (Kad and extended requests)
+  4711/tcp: eMule web server (optional, enable it in eMule first)
