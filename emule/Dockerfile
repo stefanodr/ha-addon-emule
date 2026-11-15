@@ -6,7 +6,9 @@ ARG EMULE_SHA256=f21a078bfb46df1c87124cd91b545f92949a54795c615639e2cd647749b0235
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8
 
-RUN apt-get update \
+# winetricks lives in Debian's "contrib" component, which is off by default
+RUN sed -i 's/^Components: main$/Components: main contrib/' /etc/apt/sources.list.d/debian.sources \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \

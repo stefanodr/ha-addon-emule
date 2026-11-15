@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1
+
+**English**
+
+- Fix: the image build failed because `winetricks` is in Debian's `contrib` component; it is now enabled.
+
+**Italiano**
+
+- Correzione: il build dell'immagine falliva perché `winetricks` si trova nel componente `contrib` di Debian; ora è abilitato.
+
 ## 0.1.0
 
 **English**
