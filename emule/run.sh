@@ -74,6 +74,19 @@ Autoconnect=1
 EOF
 fi
 
+# eMule may ignore -c and fall back to folders next to emule.exe (inside the
+# container, lost on update). Point those defaults to persistent locations.
+link_dir() {
+    local target="$1" link="$2"
+    if [ -e "$link" ] && [ ! -L "$link" ]; then
+        rm -rf "$link"
+    fi
+    ln -sfn "$target" "$link"
+}
+link_dir "$CONFIG_DIR" /opt/emule/config
+link_dir "$INCOMING_DIR" /opt/emule/incoming
+link_dir "$TEMP_DIR" /opt/emule/temp
+
 # ---------------------------------------------------------------- run eMule
 STOP=0
 cleanup() {

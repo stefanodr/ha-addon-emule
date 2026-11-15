@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2
+
+**English**
+
+- Fix: eMule used its default `config`, `incoming` and `temp` folders next to `emule.exe`, inside the container, so settings and downloads were lost on update. These folders now point to persistent locations (`/data/emule-config`, and `Incoming` / `Temp` under the download folder).
+
+**Italiano**
+
+- Correzione: eMule usava le cartelle predefinite `config`, `incoming` e `temp` accanto a `emule.exe`, dentro il contenitore, quindi impostazioni e download andavano persi con gli aggiornamenti. Ora queste cartelle puntano a percorsi persistenti (`/data/emule-config` e `Incoming` / `Temp` dentro la cartella dei download).
+
 ## 0.1.1
 
 **English**
