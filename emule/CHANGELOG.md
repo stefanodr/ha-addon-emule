@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.3
+
+**English**
+
+- Lower idle CPU usage: the VNC server no longer polls the screen continuously (removed `-noxdamage`, added slower polling when idle).
+- New icon and logo: a stylized mule.
+
+**Italiano**
+
+- Minore uso di CPU a riposo: il server VNC non controlla più lo schermo di continuo (rimosso `-noxdamage`, polling più lento quando non c'è attività).
+- Nuova icona e nuovo logo: un mulo stilizzato.
+
 ## 0.1.2
 
 **English**

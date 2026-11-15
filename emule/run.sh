@@ -41,7 +41,9 @@ for _ in $(seq 1 50); do
 done
 
 openbox &
-x11vnc -display :0 -localhost -nopw -forever -shared -rfbport 5900 -noxdamage -quiet &
+# Rely on the X DAMAGE extension and slow polling when idle to keep CPU usage low
+x11vnc -display :0 -localhost -nopw -forever -shared -rfbport 5900 \
+    -wait 50 -defer 50 -nap -quiet &
 websockify --web /opt/novnc 8099 localhost:5900 &
 
 # ---------------------------------------------------------------- wine prefix
