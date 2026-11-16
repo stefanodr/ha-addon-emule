@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.6
+
+**English**
+
+- First **stable** release (the add-on is no longer marked as experimental).
+- Complete rewrite of the documentation in English and Italian: first start, usage, network and ports, eMule web interface, security, storage (external disks, several disks, filesystems, safe disconnection), optimization with measured figures, troubleshooting.
+- The add-on documentation tab now covers options, external disk and web interface in both languages.
+- No change to the add-on behavior.
+
+**Italiano**
+
+- Prima versione **stabile** (l'add-on non è più indicato come sperimentale).
+- Documentazione riscritta in modo completo in inglese e italiano: primo avvio, uso, rete e porte, interfaccia web di eMule, sicurezza, archiviazione (dischi esterni, più dischi, filesystem, scollegamento sicuro), ottimizzazione con dati misurati, risoluzione dei problemi.
+- La scheda di documentazione dell'add-on ora tratta opzioni, disco esterno e interfaccia web in entrambe le lingue.
+- Nessuna modifica al comportamento dell'add-on.
+
 ## 0.1.5
 
 **English**
