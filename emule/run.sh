@@ -18,6 +18,7 @@ win_path() {
 RESOLUTION="$(opt resolution 1600x900)"
 DOWNLOAD_ROOT="$(opt download_path /media/emule)"
 INSTALL_VCREDIST="$(opt install_vcredist false)"
+REQUIRE_EXTERNAL_DISK="$(opt require_external_disk false)"
 
 export DISPLAY=:0
 export WINEPREFIX=/data/wine
@@ -29,6 +30,36 @@ WINESERVER="$(command -v wineserver || echo /usr/lib/wine/wineserver64)"
 CONFIG_DIR=/data/emule-config
 INCOMING_DIR="${DOWNLOAD_ROOT}/Incoming"
 TEMP_DIR="${DOWNLOAD_ROOT}/Temp"
+
+# Optional safety check: when the download folder is meant to live on a separate
+# disk (for example a USB drive shown under /media), refuse to start if that disk
+# is missing. Otherwise mkdir would silently create the folders on the system disk.
+if [ "$REQUIRE_EXTERNAL_DISK" = "true" ]; then
+    BASE_DIR="/$(printf '%s' "$DOWNLOAD_ROOT" | cut -d/ -f2)"     # e.g. /media
+    MOUNT_DIR="$(printf '%s' "$DOWNLOAD_ROOT" | cut -d/ -f1-3)"   # e.g. /media/Volume
+
+    disk_ready() {
+        # listing the folder also triggers a systemd automount, if there is one
+        ls -A "$MOUNT_DIR" >/dev/null 2>&1 || return 1
+        [ "$(stat -c %d "$MOUNT_DIR")" != "$(stat -c %d "$BASE_DIR")" ] || return 1
+        [ "$(stat -f -c %T "$MOUNT_DIR")" != "autofs" ] || return 1
+    }
+
+    log "Checking that $MOUNT_DIR is a separate disk"
+    tries=0
+    until disk_ready; do
+        tries=$((tries + 1))
+        if [ "$tries" -ge 36 ]; then
+            log "ERROR: $MOUNT_DIR is not a separate mounted disk."
+            log "Not starting, so that downloads do not fill the system disk."
+            log "Connect the disk (it must be listed under Settings > System > Storage) and restart the add-on,"
+            log "or turn off 'require_external_disk' if this folder is meant to be on the system disk."
+            exit 1
+        fi
+        sleep 5
+    done
+    log "Disk found at $MOUNT_DIR"
+fi
 
 mkdir -p "$CONFIG_DIR" "$INCOMING_DIR" "$TEMP_DIR" "$WINEPREFIX"
 

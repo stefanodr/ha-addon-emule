@@ -5,6 +5,9 @@ configuration:
   download_path:
     name: Download folder
     description: Base folder for downloads. The Incoming and Temp sub-folders are created here on first start (default /media/emule).
+  require_external_disk:
+    name: Require a separate disk
+    description: Turn this on when the download folder is on an external disk, for example /media/Volume/emule. If the disk is not connected, the add-on waits for it and then stops, instead of writing to the system disk.
   install_vcredist:
     name: Install Visual C++ runtime
     description: Only enable this if eMule does not start. Installs the Visual C++ runtime into the Wine prefix once, at the next start.

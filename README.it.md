@@ -42,7 +42,21 @@ Il web server di eMule (porta 4711) è facoltativo. Abilitalo in eMule (Opzioni 
 |---------|-------------|-------------|
 | `resolution` | `1600x900` | Dimensione del desktop virtuale |
 | `download_path` | `/media/emule` | Cartella base dei download (al suo interno vengono create `Incoming` e `Temp`) |
+| `require_external_disk` | `false` | Usalo quando `download_path` è su un disco esterno. Se il disco manca, l'add-on aspetta fino a 3 minuti e poi si ferma, invece di scrivere sul disco di sistema |
 | `install_vcredist` | `false` | Installa una volta il runtime Visual C++. Attivalo solo se eMule non si avvia |
+
+## Usare un disco esterno
+
+Per tenere i download fuori dal disco di sistema, collega l'unità e aggiungila come archiviazione **Media** in Home Assistant (**Impostazioni → Sistema → Archiviazione**). Comparirà come cartella dentro `/media`, per esempio `/media/Volume`.
+
+1. Imposta `download_path` su una cartella del disco, per esempio `/media/Volume/emule`, e attiva `require_external_disk`.
+2. Riavvia l'add-on.
+3. In eMule apri **Opzioni → Cartelle** e imposta Incoming e Temp su `Z:\media\Volume\emule\Incoming` e `Z:\media\Volume\emule\Temp`. Serve perché eMule conserva una sua copia dei percorsi dopo il primo avvio.
+
+Note:
+- `exFAT` non ha journal: non scollegare il disco mentre eMule è in esecuzione.
+- I file temporanei causano molte piccole scritture. Un disco meccanico va bene, una chiavetta USB si consuma in fretta.
+- Il controllo viene fatto all'avvio dell'add-on. Se il disco viene rimosso mentre eMule è in esecuzione, ferma l'add-on.
 
 ## Dati e backup
 

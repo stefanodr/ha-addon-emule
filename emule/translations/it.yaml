@@ -5,6 +5,9 @@ configuration:
   download_path:
     name: Cartella dei download
     description: Cartella base per i download. Le sottocartelle Incoming e Temp vengono create qui al primo avvio (predefinita /media/emule).
+  require_external_disk:
+    name: Richiedi un disco separato
+    description: Attivalo quando la cartella dei download è su un disco esterno, per esempio /media/Volume/emule. Se il disco non è collegato, l'add-on lo aspetta e poi si ferma, invece di scrivere sul disco di sistema.
   install_vcredist:
     name: Installa il runtime Visual C++
     description: Attivalo solo se eMule non si avvia. Installa una volta sola il runtime Visual C++ nel prefisso Wine al prossimo avvio.

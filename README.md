@@ -42,7 +42,21 @@ The eMule web server (port 4711) is optional. Enable it in eMule (Options → We
 |--------|---------|-------------|
 | `resolution` | `1600x900` | Size of the virtual desktop |
 | `download_path` | `/media/emule` | Base folder for downloads (`Incoming` and `Temp` are created inside it) |
+| `require_external_disk` | `false` | Use it when `download_path` is on an external disk. If the disk is missing, the add-on waits up to 3 minutes and then stops instead of writing to the system disk |
 | `install_vcredist` | `false` | Installs the Visual C++ runtime once. Enable it only if eMule does not start |
+
+## Using an external disk
+
+To keep downloads off the system disk, connect the drive and add it as **Media** storage in Home Assistant (**Settings → System → Storage**). It then appears as a folder under `/media`, for example `/media/Volume`.
+
+1. Set `download_path` to a folder on that disk, for example `/media/Volume/emule`, and turn on `require_external_disk`.
+2. Restart the add-on.
+3. In eMule open **Options → Directories** and set the Incoming and Temp folders to `Z:\media\Volume\emule\Incoming` and `Z:\media\Volume\emule\Temp`. This step is needed because eMule keeps its own copy of the paths after the first start.
+
+Notes:
+- `exFAT` has no journal: do not unplug the disk while eMule is running.
+- Temporary files cause many small writes. A hard disk is fine, a USB stick will wear out quickly.
+- The check runs when the add-on starts. If the disk is removed while eMule is running, stop the add-on.
 
 ## Data and backups
 

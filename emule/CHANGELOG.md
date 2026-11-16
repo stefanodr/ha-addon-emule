@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.4
+
+**English**
+
+- New option `require_external_disk`: when the download folder is on an external disk (for example `/media/Volume/emule`), the add-on checks at start that the disk is really mounted. If it is not, it waits up to 3 minutes and then stops with an explanation in the log, instead of silently writing to the system disk.
+- README: new section on using an external disk.
+
+**Italiano**
+
+- Nuova opzione `require_external_disk`: quando la cartella dei download è su un disco esterno (per esempio `/media/Volume/emule`), all'avvio l'add-on controlla che il disco sia davvero montato. Se non lo è, aspetta fino a 3 minuti e poi si ferma con una spiegazione nel log, invece di scrivere in silenzio sul disco di sistema.
+- README: nuova sezione sull'uso di un disco esterno.
+
 ## 0.1.3
 
 **English**
