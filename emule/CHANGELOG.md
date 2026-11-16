@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.5
+
+**English**
+
+- eMule and its `wineserver` now run at low priority (`nice 10`), so a busy host gives CPU to other services first. The idle CPU usage itself is unchanged: it comes from eMule running under Wine, not from the network or the interface.
+
+**Italiano**
+
+- eMule e il suo `wineserver` ora girano a priorità bassa (`nice 10`), così, quando l'host è carico, la CPU va prima agli altri servizi. Il consumo a riposo non cambia: dipende da eMule sotto Wine, non dalla rete né dall'interfaccia.
+
 ## 0.1.4
 
 **English**

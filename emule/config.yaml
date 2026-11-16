@@ -1,5 +1,5 @@
 name: eMule
-version: "0.1.4"
+version: "0.1.5"
 slug: emule
 description: eMule Community (ed2k / Kad) running under Wine, with its full interface available inside Home Assistant
 url: https://github.com/stefanodr/ha-addon-emule

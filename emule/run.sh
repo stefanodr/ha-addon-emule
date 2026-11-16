@@ -132,8 +132,16 @@ trap cleanup TERM INT
 
 while [ "$STOP" -eq 0 ]; do
     log "Starting eMule"
-    "$WINE" /opt/emule/emule.exe -c "$(win_path "$CONFIG_DIR")" &
+    # Low priority: eMule is a background downloader, other services come first
+    nice -n 10 "$WINE" /opt/emule/emule.exe -c "$(win_path "$CONFIG_DIR")" &
     EMULE_PID=$!
+    # wineserver is started on demand by Wine: give it the same priority
+    (
+        sleep 5
+        for p in $(pgrep -f wineserver 2>/dev/null); do
+            renice -n 10 -p "$p" >/dev/null 2>&1 || true
+        done
+    ) &
     wait "$EMULE_PID" || true
     [ "$STOP" -eq 1 ] && break
     log "eMule exited, restarting in 5 seconds"
