@@ -6,6 +6,8 @@ Esegui il vero **eMule** (il client Windows per le reti eD2K e Kad) dentro Home 
 
 > **Stato: stabile.** Prima versione stabile. È stato provato su Home Assistant OS in esecuzione su un mini PC x86_64, con i download su un SSD USB. Se qualcosa non funziona nella tua configurazione, apri una issue.
 
+> **Nello stesso repository c'è anche [HaMedia](hamedia/README.it.md)**, un server multimediale DLNA che mostra in TV i file scaricati, come fa il server multimediale di un router.
+
 ## Funzioni
 
 - Il vero **eMule Community 0.70b** (64 bit), non un clone: reti eD2K e Kad, crediti, coda, ricerca, categorie, filtro IP, scheduler e web server integrato.

@@ -1,0 +1,34 @@
+name: HaMedia
+version: "0.1.0"
+slug: hamedia
+description: DLNA/UPnP media server (MiniDLNA) that shows folders of your Home Assistant media storage to TVs and players
+url: https://github.com/stefanodr/ha-addon-emule
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: services
+boot: auto
+stage: experimental
+host_network: true
+map:
+  - type: media
+    read_only: true
+  - type: share
+    read_only: true
+options:
+  server_name: HaMedia
+  media_dirs:
+    - /media/emule/Incoming
+  media_type: all
+  port: 8200
+  require_external_disk: false
+  rescan_on_start: true
+schema:
+  server_name: str
+  media_dirs:
+    - str
+  media_type: list(all|video|audio|pictures)
+  port: port
+  require_external_disk: bool
+  rescan_on_start: bool

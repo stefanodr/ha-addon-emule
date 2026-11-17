@@ -1,0 +1,19 @@
+configuration:
+  server_name:
+    name: Nome del server
+    description: Il nome che la TV o il lettore mostra nell'elenco dei server multimediali.
+  media_dirs:
+    name: Cartelle da pubblicare
+    description: Una o più cartelle sotto /media o /share, per esempio /media/Volume/emule/Incoming. Vengono pubblicate in sola lettura.
+  media_type:
+    name: Tipo di contenuti
+    description: Pubblica tutto (all) oppure solo video, audio o immagini di queste cartelle.
+  port:
+    name: Porta
+    description: Porta HTTP del server multimediale (predefinita 8200). L'add-on usa la rete dell'host, quindi questa porta viene usata direttamente sulla macchina di Home Assistant.
+  require_external_disk:
+    name: Richiedi un disco separato
+    description: Attivalo quando le cartelle sono su un disco esterno, per esempio /media/Volume/.... All'avvio l'add-on aspetta il disco fino a 3 minuti e poi si ferma, invece di pubblicare una libreria vuota.
+  rescan_on_start:
+    name: Riscansiona all'avvio
+    description: Riscansiona le cartelle a ogni avvio dell'add-on, così i file aggiunti o tolti mentre era fermo vengono rilevati.

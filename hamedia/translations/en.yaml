@@ -1,0 +1,19 @@
+configuration:
+  server_name:
+    name: Server name
+    description: The name your TV or player shows in its list of media servers.
+  media_dirs:
+    name: Folders to publish
+    description: One or more folders under /media or /share, for example /media/Volume/emule/Incoming. They are published read-only.
+  media_type:
+    name: Content type
+    description: Publish everything (all), or only video, audio or pictures from these folders.
+  port:
+    name: Port
+    description: HTTP port of the media server (default 8200). The add-on uses the host network, so this port is used directly on the Home Assistant machine.
+  require_external_disk:
+    name: Require a separate disk
+    description: Turn this on when the folders are on an external disk, for example /media/Volume/.... At start the add-on waits up to 3 minutes for the disk and then stops, instead of publishing an empty library.
+  rescan_on_start:
+    name: Rescan at start
+    description: Rescan the folders every time the add-on starts, so files added or removed while it was stopped are picked up.
