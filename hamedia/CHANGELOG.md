@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1
+
+**English**
+
+- Fix: the add-on stopped at start with "Failed to open log file '/var/log/minidlna/minidlna.log'". The log folder is now created in the add-on data folder, and what MiniDLNA writes there is shown in the add-on log.
+
+**Italiano**
+
+- Correzione: l'add-on si fermava all'avvio con "Failed to open log file '/var/log/minidlna/minidlna.log'". Ora la cartella di log viene creata nella cartella dati dell'add-on e ciò che MiniDLNA vi scrive compare nel log dell'add-on.
+
 ## 0.1.0
 
 **English**

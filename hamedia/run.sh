@@ -85,13 +85,17 @@ if [ "$REQUIRE_EXTERNAL_DISK" = "true" ]; then
 fi
 
 # ---------------------------------------------------------------- config
-mkdir -p "$DATA_DIR/db"
+mkdir -p "$DATA_DIR/db" "$DATA_DIR/log"
 CONF="$DATA_DIR/minidlna.conf"
+LOGFILE="$DATA_DIR/log/minidlna.log"
+# Some MiniDLNA versions always write a log file, even in foreground mode
+: > "$LOGFILE"
 
 {
     echo "port=$PORT"
     echo "friendly_name=$SERVER_NAME"
     echo "db_dir=$DATA_DIR/db"
+    echo "log_dir=$DATA_DIR/log"
     echo "inotify=yes"
     echo "notify_interval=300"
     echo "strict_dlna=no"
@@ -115,5 +119,8 @@ RESCAN=""
 
 log "Starting MiniDLNA as '$SERVER_NAME' on port $PORT"
 log "Status page: http://<IP-of-Home-Assistant>:$PORT/"
+# Show in the add-on log whatever MiniDLNA writes to its log file
+# (versions that log to the screen leave the file empty, so nothing is repeated)
+tail -n 0 -F "$LOGFILE" 2>/dev/null &
 # exec: MiniDLNA becomes the main process and receives stop signals directly
 exec minidlnad -S -f "$CONF" -P /run/minidlna.pid $RESCAN
