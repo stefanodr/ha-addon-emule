@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.2
+
+**English**
+
+- New icon and logo: a television with a play button, which says more clearly what the add-on is.
+- No change to the add-on behavior.
+
+**Italiano**
+
+- Nuova icona e nuovo logo: una televisione con un tasto play, che dice più chiaramente cos'è l'add-on.
+- Nessuna modifica al comportamento dell'add-on.
+
 ## 0.1.1
 
 **English**
