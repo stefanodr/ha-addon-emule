@@ -85,8 +85,8 @@ seed_conf eMule ConnectToKad 1
 seed_conf eMule ConnectToED2K 1
 seed_conf eMule UPnPEnabled 0
 set_conf eMule Nick "$NICK"
-set_conf eMule Port 4663
-set_conf eMule UDPPort 4673
+set_conf eMule Port 4662
+set_conf eMule UDPPort 4672
 set_conf eMule IncomingDir "$INCOMING_DIR"
 set_conf eMule TempDir "$TEMP_DIR"
 set_conf ExternalConnect AcceptExternalConnections 1

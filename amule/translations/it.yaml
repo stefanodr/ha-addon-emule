@@ -12,5 +12,5 @@ configuration:
     name: Password dell'interfaccia web
     description: Password dell'interfaccia web di aMule. Se vuota, ne viene generata una casuale una sola volta e mostrata nel log dell'add-on.
 network:
-  4663/tcp: Porta TCP di aMule (connessioni client ed2k)
-  4673/udp: Porta UDP di aMule (Kad e richieste estese)
+  4662/tcp: Porta TCP di aMule (connessioni client ed2k)
+  4672/udp: Porta UDP di aMule (Kad e richieste estese)

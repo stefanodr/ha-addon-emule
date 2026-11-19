@@ -20,11 +20,11 @@ map:
   - type: share
     read_only: false
 ports:
-  4663/tcp: 4663
-  4673/udp: 4673
+  4662/tcp: 4662
+  4672/udp: 4672
 ports_description:
-  4663/tcp: aMule TCP port (ed2k client connections)
-  4673/udp: aMule UDP port (Kad and extended requests)
+  4662/tcp: aMule TCP port (ed2k client connections)
+  4672/udp: aMule UDP port (Kad and extended requests)
 options:
   download_path: /media/amule
   require_external_disk: false
