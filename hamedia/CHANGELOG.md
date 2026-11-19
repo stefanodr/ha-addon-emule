@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.3
+
+**English**
+
+- The icon shown by TVs and players in their list of media servers is now the same television with a play button used by the add-on. MiniDLNA is rebuilt during the image build with its four built-in icons replaced.
+- The first build/update takes a few minutes longer because MiniDLNA is compiled.
+- Some TVs keep the old icon in a cache: if it does not change, restart the TV or reopen the media server list.
+
+**Italiano**
+
+- L'icona mostrata da TV e lettori nell'elenco dei server multimediali è ora la stessa televisione con tasto play usata dall'add-on. MiniDLNA viene ricompilato durante la creazione dell'immagine sostituendo le sue quattro icone interne.
+- La prima installazione/aggiornamento richiede qualche minuto in più perché MiniDLNA viene compilato.
+- Alcune TV conservano la vecchia icona in cache: se non cambia, riavvia la TV o riapri l'elenco dei server multimediali.
+
 ## 0.1.2
 
 **English**
