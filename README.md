@@ -8,6 +8,8 @@ Run the real **eMule** (the Windows client for the eD2K and Kad networks) inside
 
 > **Also in this repository: [HaMedia](hamedia/README.md)**, a DLNA media server that shows your downloaded files to your TV, like the media server of a router.
 
+> **Also in this repository: [aMule](amule/DOCS.md)**, a lightweight native alternative (no Wine) with a web interface, to compare with this add-on.
+
 ## Features
 
 - The real **eMule Community 0.70b** (64-bit), not a look-alike: eD2K and Kad networks, credits, queue, search, categories, IP filter, scheduler and the built-in web server.

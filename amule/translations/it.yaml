@@ -1,0 +1,16 @@
+configuration:
+  download_path:
+    name: Cartella dei download
+    description: Cartella base dei download (sotto /media o /share). Le sottocartelle Incoming e Temp vengono create qui al primo avvio (predefinita /media/amule).
+  require_external_disk:
+    name: Richiedi un disco separato
+    description: Attivalo quando la cartella dei download è su un disco esterno, per esempio /media/Volume/amule. Se il disco non è collegato, l'add-on lo aspetta e poi si ferma, invece di scrivere sul disco di sistema.
+  nickname:
+    name: Nickname
+    description: Il nome che gli altri utenti ed2k vedono per te.
+  web_password:
+    name: Password dell'interfaccia web
+    description: Password dell'interfaccia web di aMule. Se vuota, ne viene generata una casuale una sola volta e mostrata nel log dell'add-on.
+network:
+  4663/tcp: Porta TCP di aMule (connessioni client ed2k)
+  4673/udp: Porta UDP di aMule (Kad e richieste estese)
