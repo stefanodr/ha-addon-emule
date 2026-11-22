@@ -8,7 +8,7 @@ Run the real **eMule** (the Windows client for the eD2K and Kad networks) inside
 
 > **Also in this repository: [HaMedia](hamedia/README.md)**, a DLNA media server that shows your downloaded files to your TV, like the media server of a router.
 
-> **Also in this repository: [aMule](amule/DOCS.md)**, a lightweight native alternative (no Wine) with a web interface, to compare with this add-on.
+> **Also in this repository: [aMule](amule/README.md)**, a lightweight native alternative (no Wine) with a web interface: about 15 times less CPU at rest. Choose this add-on if you want exactly the Windows program, aMule if you want an always-on downloader.
 
 ## Features
 

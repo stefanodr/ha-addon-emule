@@ -1,5 +1,5 @@
 name: aMule
-version: "0.1.0"
+version: "0.2.0"
 slug: amule
 description: aMule (ed2k / Kad) native Linux daemon with web interface, a lightweight alternative to the eMule add-on
 url: https://github.com/stefanodr/ha-addon-emule
@@ -9,7 +9,7 @@ arch:
 init: false
 startup: services
 boot: auto
-stage: experimental
+stage: stable
 ingress: true
 ingress_port: 4721
 panel_icon: mdi:donkey
