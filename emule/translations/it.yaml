@@ -11,6 +11,18 @@ configuration:
   install_vcredist:
     name: Installa il runtime Visual C++
     description: Attivalo solo se eMule non si avvia. Installa una volta sola il runtime Visual C++ nel prefisso Wine al prossimo avvio.
+  nickname:
+    name: Nickname
+    description: Il nome che gli altri utenti ed2k vedono per te. Lascialo vuoto per mantenere quello impostato in eMule.
+  web_server:
+    name: Abilita l'interfaccia web
+    description: Attiva il web server di eMule (porta 4711) a ogni avvio, con la password qui sotto. Per raggiungerlo dalla rete imposta anche una porta host per 4711/tcp nella scheda Rete. Non inoltrarla mai sul router.
+  web_password:
+    name: Password dell'interfaccia web
+    description: Password dell'interfaccia web di eMule. Se vuota, ne viene generata una casuale una sola volta e mostrata nel log dell'add-on. Usata solo se l'interfaccia web è abilitata qui.
+  watchdog:
+    name: Watchdog
+    description: Controlla ogni minuto che eMule e il desktop remoto siano attivi e li riavvia se smettono di rispondere.
 network:
   4662/tcp: Porta TCP di eMule (connessioni client ed2k)
   4672/udp: Porta UDP di eMule (Kad e richieste estese)

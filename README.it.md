@@ -93,7 +93,7 @@ L'add-on gira in una sua rete Docker, quindi eMule non riesce a parlare con il r
 
 L'interfaccia web permette di vedere la coda e aggiungere download da un PC, tablet o telefono della tua rete.
 
-1. In eMule vai su **Opzioni → Interfaccia Web**, abilita il web server e imposta una **password amministratore forte e unica**. Applica.
+1. Attiva l'opzione `web_server` e imposta una `web_password` **forte e unica** (se la lasci vuota, una password casuale compare una sola volta nel log dell'add-on). In alternativa abilitala in eMule da **Opzioni → Interfaccia Web**.
 2. In Home Assistant apri l'add-on, scheda **Rete**, e imposta una porta host per `4711/tcp` (per esempio 4711). Salva e riavvia l'add-on.
 3. Da qualsiasi dispositivo della rete apri `http://<IP-di-Home-Assistant>:4711`.
 
@@ -112,6 +112,10 @@ L'interfaccia web permette di vedere la coda e aggiungere download da un PC, tab
 | `download_path` | `/media/emule` | Cartella base dei download (al suo interno vengono create `Incoming` e `Temp`) |
 | `require_external_disk` | `false` | Attivalo quando `download_path` è su un disco esterno. Se il disco manca, l'add-on aspetta fino a 3 minuti e poi si ferma, invece di scrivere sul disco di sistema |
 | `install_vcredist` | `false` | Installa una volta il runtime Visual C++. Attivalo solo se eMule non si avvia |
+| `nickname` | vuoto | Nome che vedono gli altri utenti ed2k. Vuoto mantiene quello impostato in eMule |
+| `web_server` | `false` | Abilita il web server di eMule (porta 4711) a ogni avvio |
+| `web_password` | vuota | Password dell'interfaccia web. Se vuota, ne viene generata una casuale e mostrata una volta nel log dell'add-on |
+| `watchdog` | `true` | Ogni minuto controlla che eMule e il desktop remoto siano attivi e li riavvia se smettono di rispondere |
 
 Le porte di rete si cambiano nella scheda **Rete**. Dopo aver cambiato le opzioni, riavvia l'add-on.
 
@@ -172,6 +176,8 @@ Sul mini PC x86_64 dell'autore, a riposo:
 Questo consumo a riposo dipende da eMule che gira sotto Wine e **non** è cambiato né con eMule disconnesso dalle reti né con l'interfaccia chiusa.
 
 ### Consigli
+
+- **Alternativa più leggera:** se il consumo a riposo conta più del programma Windows, usa l'[add-on aMule](amule/README.it.md): circa 15 volte meno CPU a riposo.
 
 - **Disco:** metti `Incoming` e `Temp` su un SSD o un disco meccanico locale, non su archiviazione di rete.
 - **Limiti:** imposta l'upload a circa l'80% dell'upload reale ed evita decine di download contemporanei.

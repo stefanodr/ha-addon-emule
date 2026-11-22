@@ -1,5 +1,5 @@
 name: eMule
-version: "0.1.7"
+version: "0.2.0"
 slug: emule
 description: eMule Community (ed2k / Kad) running under Wine, with its full interface available inside Home Assistant
 url: https://github.com/stefanodr/ha-addon-emule
@@ -31,8 +31,16 @@ options:
   download_path: /media/emule
   require_external_disk: false
   install_vcredist: false
+  nickname: ""
+  web_server: false
+  web_password: ""
+  watchdog: true
 schema:
   resolution: list(1280x720|1366x768|1600x900|1920x1080)
   download_path: str
   require_external_disk: bool
   install_vcredist: bool
+  nickname: str?
+  web_server: bool
+  web_password: password?
+  watchdog: bool

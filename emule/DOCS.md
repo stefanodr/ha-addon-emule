@@ -18,6 +18,10 @@ This add-on runs eMule Community under Wine. Open **eMule** from the sidebar to 
 | `download_path` | `/media/emule` | Base folder for downloads (`Incoming` and `Temp` are created inside) |
 | `require_external_disk` | `false` | Use it when `download_path` is on an external disk: if the disk is missing, the add-on stops instead of writing to the system disk |
 | `install_vcredist` | `false` | Enable only if eMule does not start |
+| `nickname` | empty | Name other users see; empty keeps the one set in eMule |
+| `web_server` | `false` | Enables the eMule web server (port 4711) at every start |
+| `web_password` | empty | Password of the web interface; if empty, a random one is generated and logged once |
+| `watchdog` | `true` | Every minute checks eMule and the remote desktop and restarts them if they stop responding |
 
 ### External disk
 
@@ -29,7 +33,7 @@ Before unplugging the disk, stop the add-on and run `sync`. Do not unplug an exF
 
 ### Web interface
 
-Enable it in eMule (**Options → Web Interface**) with a strong password, set a host port for `4711/tcp` in the **Network** tab and open `http://<IP-of-Home-Assistant>:4711`. Keep it on the local network: never forward it on the router.
+Enable it with the `web_server` option (and optionally `web_password`; otherwise a random password is shown in the log), or in eMule (**Options → Web Interface**). Then set a host port for `4711/tcp` in the **Network** tab and open `http://<IP-of-Home-Assistant>:4711`. Keep it on the local network: never forward it on the router.
 
 ### Problems
 
@@ -55,6 +59,10 @@ Questo add-on esegue eMule Community con Wine. Apri **eMule** dalla barra latera
 | `download_path` | `/media/emule` | Cartella base dei download (al suo interno vengono create `Incoming` e `Temp`) |
 | `require_external_disk` | `false` | Usalo quando `download_path` è su un disco esterno: se il disco manca, l'add-on si ferma invece di scrivere sul disco di sistema |
 | `install_vcredist` | `false` | Attivalo solo se eMule non si avvia |
+| `nickname` | vuoto | Nome che vedono gli altri utenti; vuoto mantiene quello impostato in eMule |
+| `web_server` | `false` | Abilita il web server di eMule (porta 4711) a ogni avvio |
+| `web_password` | vuota | Password dell'interfaccia web; se vuota ne viene generata una casuale e mostrata una volta nel log |
+| `watchdog` | `true` | Ogni minuto controlla eMule e il desktop remoto e li riavvia se smettono di rispondere |
 
 ### Disco esterno
 
@@ -66,7 +74,7 @@ Prima di scollegare il disco, ferma l'add-on e lancia `sync`. Non scollegare un 
 
 ### Interfaccia web
 
-Abilitala in eMule (**Opzioni → Interfaccia Web**) con una password forte, imposta una porta host per `4711/tcp` nella scheda **Rete** e apri `http://<IP-di-Home-Assistant>:4711`. Tienila sulla rete locale: non inoltrarla mai sul router.
+Abilitala con l'opzione `web_server` (e, facoltativamente, `web_password`; altrimenti nel log compare una password casuale) oppure in eMule (**Opzioni → Interfaccia Web**). Poi imposta una porta host per `4711/tcp` nella scheda **Rete** e apri `http://<IP-di-Home-Assistant>:4711`. Tienila sulla rete locale: non inoltrarla mai sul router.
 
 ### Problemi
 

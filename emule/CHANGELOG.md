@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0
+
+**English**
+
+- New options in the add-on configuration: `nickname`, `web_server`, `web_password` and `watchdog`.
+- `web_server` enables the eMule web server (port 4711) at every start with `web_password`; if the password is empty, a random one is generated and shown once in the log. Set a host port for 4711/tcp in the Network tab to reach it.
+- `watchdog` (on by default): every minute it restarts the remote desktop helpers if they stop and restarts eMule if it keeps running without listening on its TCP port.
+- Documentation: choosing between eMule and the new aMule add-on.
+- Not added: a "low resource" mode. Our measurements show that lowering connections or statistics does not reduce the idle CPU, which comes from Wine; for lower consumption use the aMule add-on.
+
+**Italiano**
+
+- Nuove opzioni nella configurazione dell'add-on: `nickname`, `web_server`, `web_password` e `watchdog`.
+- `web_server` abilita il web server di eMule (porta 4711) a ogni avvio con `web_password`; se la password è vuota ne viene generata una casuale e mostrata una volta nel log. Per raggiungerlo imposta una porta host per 4711/tcp nella scheda Rete.
+- `watchdog` (attivo di default): ogni minuto riavvia gli aiuti del desktop remoto se si fermano e riavvia eMule se resta in esecuzione senza ascoltare sulla sua porta TCP.
+- Documentazione: come scegliere tra eMule e il nuovo add-on aMule.
+- Non aggiunta: una modalità «risorse ridotte». Le nostre misure mostrano che ridurre connessioni o statistiche non abbassa la CPU a riposo, che dipende da Wine; per consumi più bassi usa l'add-on aMule.
+
 ## 0.1.7
 
 **English**

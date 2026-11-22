@@ -11,6 +11,18 @@ configuration:
   install_vcredist:
     name: Install Visual C++ runtime
     description: Only enable this if eMule does not start. Installs the Visual C++ runtime into the Wine prefix once, at the next start.
+  nickname:
+    name: Nickname
+    description: Name other ed2k users see for you. Leave empty to keep the one set in eMule.
+  web_server:
+    name: Enable the web interface
+    description: Turns on the eMule web server (port 4711) at every start, with the password below. To reach it from your network also set a host port for 4711/tcp in the Network tab. Never forward it on the router.
+  web_password:
+    name: Web interface password
+    description: Password of the eMule web interface. If empty, a random one is generated once and shown in the add-on log. Used only when the web interface is enabled here.
+  watchdog:
+    name: Watchdog
+    description: Checks every minute that eMule and the remote desktop are alive and restarts them if they stop responding.
 network:
   4662/tcp: eMule TCP port (ed2k client connections)
   4672/udp: eMule UDP port (Kad and extended requests)

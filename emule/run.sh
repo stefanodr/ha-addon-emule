@@ -15,10 +15,55 @@ win_path() {
     printf 'Z:%s' "$p"
 }
 
+# set_ini FILE SECTION KEY VALUE: set a key in a Windows-style ini file.
+# Creates the section/key when missing and keeps CRLF line endings.
+set_ini() {
+    local f="$1" sec="$2" key="$3" val="$4" tmp
+    tmp="$(mktemp)"
+    awk -v sec="[$sec]" -v key="$key" -v val="$val" '
+    {
+        raw = $0
+        eol = (raw ~ /\r$/) ? "\r" : ""
+        le = eol
+        line = raw; sub(/\r$/, "", line); sub(/^\357\273\277/, "", line)
+        if (line ~ /^\[.*\]$/) {
+            if (insec && !done) { print key "=" val eol; done = 1 }
+            insec = (tolower(line) == tolower(sec))
+            if (insec) found = 1
+            print raw; next
+        }
+        if (insec && !done && index(line, "=") > 0) {
+            k = line; sub(/=.*/, "", k); gsub(/^[ \t]+|[ \t]+$/, "", k)
+            if (tolower(k) == tolower(key)) { print key "=" val eol; done = 1; next }
+        }
+        print raw
+    }
+    END {
+        if (insec && !done) print key "=" val le
+        else if (!found) { print sec le; print key "=" val le }
+    }' "$f" > "$tmp" && cat "$tmp" > "$f"
+    rm -f "$tmp"
+}
+
+# get_ini FILE SECTION KEY: print the value, nothing if missing.
+get_ini() {
+    awk -v sec="[$2]" -v key="$3" '
+    { line = $0; sub(/\r$/, "", line); sub(/^\357\273\277/, "", line)
+      if (line ~ /^\[.*\]$/) { insec = (tolower(line) == tolower(sec)); next }
+      if (insec && index(line, "=") > 0) {
+        k = line; sub(/=.*/, "", k); gsub(/^[ \t]+|[ \t]+$/, "", k)
+        if (tolower(k) == tolower(key)) { v = line; sub(/^[^=]*=/, "", v); print v; exit }
+      } }' "$1"
+}
+
 RESOLUTION="$(opt resolution 1600x900)"
 DOWNLOAD_ROOT="$(opt download_path /media/emule)"
 INSTALL_VCREDIST="$(opt install_vcredist false)"
 REQUIRE_EXTERNAL_DISK="$(opt require_external_disk false)"
+NICKNAME="$(opt nickname '')"
+WEB_SERVER="$(opt web_server false)"
+WEB_PASSWORD="$(opt web_password '')"
+WATCHDOG="$(opt watchdog true)"
 
 export DISPLAY=:0
 export WINEPREFIX=/data/wine
@@ -73,9 +118,17 @@ done
 
 openbox &
 # Rely on the X DAMAGE extension and slow polling when idle to keep CPU usage low
-x11vnc -display :0 -localhost -nopw -forever -shared -rfbport 5900 \
-    -wait 50 -defer 50 -nap -quiet &
-websockify --web /opt/novnc 8099 localhost:5900 &
+start_vnc() {
+    x11vnc -display :0 -localhost -nopw -forever -shared -rfbport 5900 \
+        -wait 50 -defer 50 -nap -quiet &
+    VNC_PID=$!
+}
+start_novnc() {
+    websockify --web /opt/novnc 8099 localhost:5900 &
+    NOVNC_PID=$!
+}
+start_vnc
+start_novnc
 
 # ---------------------------------------------------------------- wine prefix
 if [ ! -f /data/.wine-initialized ]; then
@@ -120,15 +173,81 @@ link_dir "$CONFIG_DIR" /opt/emule/config
 link_dir "$INCOMING_DIR" /opt/emule/incoming
 link_dir "$TEMP_DIR" /opt/emule/temp
 
+# ---------------------------------------------------------------- options -> preferences.ini
+PREFS="$CONFIG_DIR/preferences.ini"
+if [ -n "$NICKNAME" ]; then
+    set_ini "$PREFS" eMule Nick "$NICKNAME"
+    log "Nickname set to '$NICKNAME'"
+fi
+if [ "$WEB_SERVER" = "true" ]; then
+    if [ -z "$WEB_PASSWORD" ]; then
+        PWFILE=/data/web-password
+        if [ ! -s "$PWFILE" ]; then
+            head -c 12 /dev/urandom | base64 | tr -d '/+=' > "$PWFILE"
+            chmod 600 "$PWFILE"
+        fi
+        WEB_PASSWORD="$(cat "$PWFILE")"
+        log "No web_password set: using a generated one, kept in the add-on data folder."
+        log "Web interface password: $WEB_PASSWORD  (set 'web_password' in the options to choose your own)"
+    fi
+    set_ini "$PREFS" WebServer Enabled 1
+    set_ini "$PREFS" WebServer Port 4711
+    set_ini "$PREFS" WebServer Password "$(printf '%s' "$WEB_PASSWORD" | md5sum | cut -d' ' -f1)"
+    log "eMule web server enabled on port 4711 (set a host port for 4711/tcp in the Network tab to reach it)"
+fi
+
+# ---------------------------------------------------------------- watchdog
+# Every minute: restart the remote-desktop helpers if they died, and restart
+# eMule if it is running but its TCP port has not been listening for 5 checks.
+port_listening() {
+    local hex
+    hex="$(printf '%04X' "$1")"
+    grep -qiE ":${hex} .* 0A " /proc/net/tcp /proc/net/tcp6 2>/dev/null
+}
+
+watchdog() {
+    local bad=0 up=0 port
+    while sleep 60; do
+        kill -0 "$VNC_PID" 2>/dev/null || { log "Watchdog: restarting x11vnc"; start_vnc; }
+        kill -0 "$NOVNC_PID" 2>/dev/null || { log "Watchdog: restarting the remote desktop proxy"; start_novnc; }
+        if pgrep -f emule.exe >/dev/null 2>&1; then
+            up=$((up + 1))
+            [ "$up" -lt 5 ] && continue            # grace period after start
+            port="$(get_ini "$PREFS" eMule Port | tr -dc '0-9')"
+            [ -n "$port" ] || continue
+            if port_listening "$port"; then
+                bad=0
+            else
+                bad=$((bad + 1))
+                if [ "$bad" -ge 5 ]; then
+                    log "Watchdog: eMule is not listening on port $port, restarting it"
+                    pkill -TERM -f emule.exe 2>/dev/null || true
+                    "$WINESERVER" -k 2>/dev/null || true
+                    bad=0; up=0
+                fi
+            fi
+        else
+            up=0; bad=0
+        fi
+    done
+}
+
 # ---------------------------------------------------------------- run eMule
 STOP=0
 cleanup() {
     STOP=1
     log "Stopping"
+    [ -n "$WATCHDOG_PID" ] && kill "$WATCHDOG_PID" 2>/dev/null || true
     pkill -TERM -f emule.exe 2>/dev/null || true
     "$WINESERVER" -k 2>/dev/null || true
 }
 trap cleanup TERM INT
+
+WATCHDOG_PID=""
+if [ "$WATCHDOG" = "true" ]; then
+    watchdog &
+    WATCHDOG_PID=$!
+fi
 
 while [ "$STOP" -eq 0 ]; do
     log "Starting eMule"

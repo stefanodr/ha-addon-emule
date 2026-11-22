@@ -93,7 +93,7 @@ The add-on runs in its own Docker network, so eMule cannot talk to your router a
 
 The web interface lets you see the queue and add downloads from a PC, tablet or phone on your network.
 
-1. In eMule go to **Options → Web Interface**, enable the web server and set a **strong, unique administrator password**. Apply.
+1. Turn on the `web_server` option and set a **strong, unique** `web_password` (if you leave it empty, a random password is shown once in the add-on log). Alternatively, enable it in eMule under **Options → Web Interface**.
 2. In Home Assistant open the add-on, tab **Network**, and set a host port for `4711/tcp` (for example 4711). Save and restart the add-on.
 3. From any device on your network open `http://<IP-of-Home-Assistant>:4711`.
 
@@ -112,6 +112,10 @@ The web interface lets you see the queue and add downloads from a PC, tablet or 
 | `download_path` | `/media/emule` | Base folder for downloads (`Incoming` and `Temp` are created inside it) |
 | `require_external_disk` | `false` | Turn it on when `download_path` is on an external disk. If the disk is missing, the add-on waits up to 3 minutes and then stops instead of writing to the system disk |
 | `install_vcredist` | `false` | Installs the Visual C++ runtime once. Enable it only if eMule does not start |
+| `nickname` | empty | Name other ed2k users see. Empty keeps the one set in eMule |
+| `web_server` | `false` | Enables the eMule web server (port 4711) at every start |
+| `web_password` | empty | Password of the web interface. If empty, a random one is generated and shown once in the add-on log |
+| `watchdog` | `true` | Every minute checks that eMule and the remote desktop are alive and restarts them if they stop responding |
 
 Network ports can be changed in the **Network** tab. After changing options, restart the add-on.
 
@@ -172,6 +176,8 @@ On the author's x86_64 mini PC, at idle:
 This idle cost comes from eMule running under Wine and did **not** change when eMule was disconnected from the networks or when nobody had the interface open.
 
 ### Recommendations
+
+- **Lighter alternative:** if idle consumption matters more than having the Windows program, use the [aMule add-on](amule/README.md): about 15 times less CPU at rest.
 
 - **Disk:** put `Incoming` and `Temp` on a local SSD or hard disk, not on network storage.
 - **Limits:** set the upload limit to about 80% of your real upload speed and avoid dozens of simultaneous downloads.
