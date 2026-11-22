@@ -4,7 +4,7 @@ HaMedia publishes folders of your Home Assistant media storage as a **DLNA/UPnP 
 
 It was made to watch on the TV the files downloaded with the [eMule add-on](../README.md) from the same repository, but it works with any folder under `/media` or `/share`.
 
-> **Status: experimental.** The media server has been tested on its own, but the add-on is new and still needs testing on real Home Assistant installations. Please open an issue if something does not work.
+> **Status: stable.** Tested on Home Assistant OS on an x86_64 mini PC, with media on a USB SSD and a Samsung smart TV. Please open an issue if something does not work on your setup.
 
 ## Features
 

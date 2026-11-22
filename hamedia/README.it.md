@@ -4,7 +4,7 @@ HaMedia pubblica cartelle dell'archiviazione multimediale di Home Assistant come
 
 Nasce per guardare in TV i file scaricati con l'[add-on eMule](../README.it.md) dello stesso repository, ma funziona con qualsiasi cartella sotto `/media` o `/share`.
 
-> **Stato: sperimentale.** Il server multimediale è stato provato da solo, ma l'add-on è nuovo e va ancora provato su installazioni reali di Home Assistant. Se qualcosa non funziona, apri una issue.
+> **Stato: stabile.** Provato su Home Assistant OS su un mini PC x86_64, con i file su un SSD USB e una smart TV Samsung. Se qualcosa non funziona nella tua configurazione, apri una issue.
 
 ## Funzioni
 

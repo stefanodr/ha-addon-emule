@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0
+
+**English**
+
+- First **stable** release (no longer marked as experimental), after tests with a Samsung smart TV and media on a USB SSD.
+- No change to the add-on behavior.
+
+**Italiano**
+
+- Prima release **stabile** (non più sperimentale), dopo le prove con una smart TV Samsung e i file su un SSD USB.
+- Nessuna modifica al comportamento dell'add-on.
+
 ## 0.1.3
 
 **English**
